@@ -2,15 +2,11 @@ version: '3.8'
 services:
     php:
         build:
-            context: ./../../
+            context: ./../
             dockerfile: ./docker/local/Dockerfile
         environment:
-            - PHP_ENABLE_XDEBUG=1
         volumes:
-            - ~/.composer-docker/cache:/root/.composer/cache
-            - ./../../app:/app
-            - ./../../vault:/vault
-            - ./../../config/local/params.php:/app/config/params.php
+            - ~/
         ports:
             - '8000:80'
         networks:
@@ -24,10 +20,10 @@ services:
         volumes:
             - ~/apps/mysql:/var/lib/
         networks:
-            - leads-network
+            - blog-network
 
 networks: 
-    leads-network:
+    blog-network:
         
 
             
