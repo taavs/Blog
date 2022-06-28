@@ -1,0 +1,33 @@
+version: '3.8'
+services:
+    php:
+        build:
+            context: ./../../
+            dockerfile: ./docker/local/Dockerfile
+        environment:
+            - PHP_ENABLE_XDEBUG=1
+        volumes:
+            - ~/.composer-docker/cache:/root/.composer/cache
+            - ./../../app:/app
+            - ./../../vault:/vault
+            - ./../../config/local/params.php:/app/config/params.php
+        ports:
+            - '8000:80'
+        networks:
+            - leads-network
+    mysql:
+        image: mysql:8
+        ports:
+        - 3333:3306
+        env_file:
+            - .dbenv
+        volumes:
+            - ~/apps/mysql:/var/lib/
+        networks:
+            - leads-network
+
+networks: 
+    leads-network:
+        
+
+            
